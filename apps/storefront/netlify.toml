@@ -1,0 +1,29 @@
+# Netlify configuration for Onlinedurst Storefront
+# Note: This deploys only the storefront. The Vendure backend
+# must be hosted separately (e.g., Railway, Render, Fly.io)
+
+[build]
+  command = "npm run build"
+  publish = ".output/public"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Redirects for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Environment variables (set in Netlify Dashboard)
+# VENDURE_SHOP_API_URL = "https://your-vendure-backend.com/shop-api"
+# VITE_SITE_URL = "https://your-site.netlify.app"
+# VITE_SITE_NAME = "Onlinedurst Heilbronn"
